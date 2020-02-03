@@ -20,7 +20,7 @@ int main(int argc, char const *argv[]) {
 		data.reserve(len / 2);
 		for(size_t i{0}; i < len -1 ; ++i)
 			data.push_back({static_cast<double>(*((uint8_t*)tmp_buf.get() + i) - 127.5),
-							static_cast<double>(*((uint8_t*)tmp_buf.get() + i + 1) - 127.5)});
+					static_cast<double>(*((uint8_t*)tmp_buf.get() + i + 1) - 127.5)});
 
 		fftw_plan plan = fftw_plan_dft_1d(data.size(),
 										  (fftw_complex*) &data[0],
