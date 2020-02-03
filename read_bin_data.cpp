@@ -23,10 +23,10 @@ int main(int argc, char const *argv[]) {
 					static_cast<double>(*((uint8_t*)tmp_buf.get() + i + 1) - 127.5)});
 
 		fftw_plan plan = fftw_plan_dft_1d(data.size(),
-										  (fftw_complex*) &data[0],
-										  (fftw_complex*) &data[0],
-										  FFTW_FORWARD,
-										  FFTW_ESTIMATE);
+						  (fftw_complex*) &data[0],
+						  (fftw_complex*) &data[0],
+						  FFTW_FORWARD,
+						  FFTW_ESTIMATE);
 
 		fftw_execute(plan);
 		fftw_destroy_plan(plan);
