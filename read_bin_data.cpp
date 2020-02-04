@@ -38,7 +38,7 @@ int main(int argc, char const *argv[]) {
 	}
 	catch(const std::exception& error) {
 		std::cerr << error.what();
-		return -1;
+		return 1;
 	}
 
 	return 0;
