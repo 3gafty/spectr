@@ -12,15 +12,15 @@ int main(int argc, char const *argv[]) {
 		const size_t len = input.tellg();
 		input.seekg(0, input.beg);
 
-		auto tmp_buf = std::make_unique<char[]>(len);
-		input.read(tmp_buf.get(), len);
+		auto tmp_buf = std::make_unique<uint8_t[]>(len);
+		input.read(reinterpret_cast<char*>(tmp_buf.get()), len);
 		input.close();
 		
 		std::vector<std::complex<double>> data;
 		data.reserve(len / 2);
 		for(size_t i{0}; i < len -1 ; ++i)
-			data.push_back({static_cast<double>(*((uint8_t*)tmp_buf.get() + i) - 127.5),
-					static_cast<double>(*((uint8_t*)tmp_buf.get() + i + 1) - 127.5)});
+			data.push_back({static_cast<double>(*(tmp_buf.get() + i) - 127.5),
+					static_cast<double>(*(tmp_buf.get() + i + 1) - 127.5)});
 
 		fftw_plan plan = fftw_plan_dft_1d(data.size(),
 						  (fftw_complex*) &data[0],
@@ -38,6 +38,7 @@ int main(int argc, char const *argv[]) {
 	}
 	catch(const std::exception& error) {
 		std::cerr << error.what();
+		return -1;
 	}
 
 	return 0;
