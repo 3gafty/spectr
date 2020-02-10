@@ -40,6 +40,10 @@ int main(int argc, char const *argv[]) {
 		std::cerr << error.what();
 		return 1;
 	}
+	catch (...) {
+		std::cerr << "unknown exception!";
+		return 2;
+	}
 
 	return 0;
 }
