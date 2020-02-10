@@ -18,7 +18,7 @@ int main(int argc, char const *argv[]) {
 		
 		std::vector<std::complex<double>> data;
 		data.reserve(len / 2);
-		for(size_t i{0}; i < len -1 ; ++i)
+		for(size_t i{0}; i < len; i += 2)
 			data.push_back({static_cast<double>(*(tmp_buf.get() + i) - 127.5),
 					static_cast<double>(*(tmp_buf.get() + i + 1) - 127.5)});
 
